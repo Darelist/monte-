@@ -3,6 +3,8 @@
 #include <math.h>
 #include <cmath>
 // funkcija
+const double qq=-1.9;
+const double qqq=1.9;
 double sixhump(double *x)
 {
     double f = (4- 2.1 * x[0] * x[0] + (pow(x[0],4))/3) * x[0] * x[0] + x[0] * x[1] + (-4+4*x[1]*x[1])*(pow(x[1],2));
@@ -71,30 +73,88 @@ int main()
     }
     else
     {
-        double ftik=-1.03, *funkcija, skaicius[2];
+        double ftik=1.03, *funkcija, skaicius[2], top[2];
         funkcija=(double*)malloc(10*sizeof(double));
         int i=0;
-      while(abs(ftik-funkcija[i])>0.3)
+      while(abs(ftik-funkcija[i])>0.1)
         {
-            for(int n=0;n<1;n++)
-            skaicius[n] = rand() * (1.9 - -1.9) / RAND_MAX + (-1.9);
+            
+            for(int n=0;n<2;n++)
+            skaicius[n] = rand() * (qqq - qq) / RAND_MAX + (qq);
             funkcija[i]=sixhump(skaicius);
-            cout<<"\n rand skaicius : "<<skaicius[0]<<"   "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;;
+            cout<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] :  "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;
             i++;
 
             if(i==10)
             {
-
-
                 free(funkcija);
                 funkcija=(double*)malloc(10*sizeof(double));
                 i=0;
-
+               //system("pause");
             }
+            
         }
-        cout<<"Taskas: "<<funkcija[i]<<endl;
+        cout<<"=============================Taskas: "<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] : "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;;
+        top[0]=funkcija[i];
         system("pause");
-    }
+        
+         
+         
+         
+         while(abs(ftik-funkcija[i])>0.01)
+        {
+            
+            for(int n=0;n<2;n++)
+            skaicius[n] = rand() * (qqq - qq) / RAND_MAX + (qq);
+            funkcija[i]=sixhump(skaicius);
+            cout<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] :  "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;
+            i++;
+
+            if(i==10)
+            {
+                free(funkcija);
+                funkcija=(double*)malloc(10*sizeof(double));
+                i=0;
+               //system("pause");
+            }
+            
+        }
+        cout<<"=============================Taskas: "<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] : "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;;
+        top[1]=funkcija[i];
+        system("pause");
+        
+        
+        
+        
+         while(abs(ftik-funkcija[i])>0.001)
+        {
+            
+            for(int n=0;n<2;n++)
+            skaicius[n] = rand() * (qqq - qq) / RAND_MAX + (qq);
+            funkcija[i]=sixhump(skaicius);
+            cout<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] :  "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;
+            i++;
+
+            if(i==10)
+            {
+                free(funkcija);
+                funkcija=(double*)malloc(10*sizeof(double));
+                i=0;
+               //system("pause");
+            }
+            
+        }
+        cout<<"=============================Taskas: "<<"\n rand skaicius[0] : "<<skaicius[0]<<" rand skaicius[1] : "<<skaicius[1]<<"\n funkcija: "<<funkcija[i]<<"\n skaicius: "<<ftik-funkcija[i]<<"\n i: "<<i<<endl;;
+        if ((top[0]!=top[1])&&(top[1]!=funkcija[i]))
+        top[2]=funkcija[i];
+        system("pause");
+        
+        
+    
+    for (int i=0;i<3;i++)
+    cout<<"\n min skaicius "<<i+1<<"-as: "<<top[i];
+    cout<<endl;
     system("pause");
     return 0;
+    }
 }
